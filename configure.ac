@@ -1,4 +1,5 @@
-dnl Process this file with autoconf to produce a configure script.
+dnl#                                               -*- Autoconf -*-
+dnl# Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.69])
 AC_INIT([stress],[1.0.4],[apw@rossby.metr.ou.edu])
 AC_CONFIG_SRCDIR([src/stress.c])
@@ -10,10 +11,10 @@ AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE([foreign])
 AM_MAINTAINER_MODE
 AM_SANITY_CHECK
-dnl AX_* macros require the autoconf-archive package
+dnl# AX_* macros require the autoconf-archive package
 AX_SPEC_PACKAGE_AND_VERSION([Makefile.spec])
 
-dnl Checks for programs.
+dnl# Checks for programs.
 AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_GCC_TRADITIONAL
@@ -22,25 +23,25 @@ PKG_PROG_PKG_CONFIG
 LT_INIT
 LTVERSION_VERSION
 
-dnl Checks for libraries.
+dnl# Checks for libraries.
 AC_CHECK_LIB([m],[sqrt])
 AC_CHECK_LIB([gen],[basename])
 
-dnl Checks for header files.
+dnl# Checks for header files.
 AC_HEADER_STDC
 AC_CHECK_HEADERS([ctype.h errno.h libgen.h math.h stdio.h stdlib.h string.h signal.h time.h unistd.h sys/wait.h])
 
-dnl Checks for typedefs, structures, and compiler characteristics.
+dnl# Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 
-dnl Checks for library functions.
+dnl# Checks for library functions.
 AC_FUNC_FORK
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([alarm sqrt strerror])
 
-dnl Options that alter compile and link.
+dnl# Options that alter compile and link.
 AC_ARG_ENABLE([static],
-               AS_HELP_STRING([--enable-static],[build static library @<:@default=no@:>@]),
+               [AS_HELP_STRING([--enable-static],[build static library @<:@default=no@:>@])],
                [static=$enableval],
                [static=no])
 

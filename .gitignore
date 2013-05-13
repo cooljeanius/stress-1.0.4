@@ -13,3 +13,4 @@ stamp-h*
 */*deps/*.*o
 */*/*deps/*.*o
 config.h
+src/stress
