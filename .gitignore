@@ -3,3 +3,12 @@
 *.o
 *.cache
 *.log
+libtool
+*.status
+stamp-h*
+*libs/*
+*.lo
+*.tmp
+*deps/*.*o
+*/*deps/*.*o
+*/*/*deps/*.*o

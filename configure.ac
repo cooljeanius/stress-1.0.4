@@ -4,9 +4,10 @@ AC_INIT([stress],[1.0.4],[apw@rossby.metr.ou.edu])
 AC_CONFIG_SRCDIR([src/stress.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
+AC_CONFIG_AUX_DIR([build-aux])
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([foreign])
 AM_MAINTAINER_MODE
 AM_SANITY_CHECK
 dnl AX_* macros require the autoconf-archive package

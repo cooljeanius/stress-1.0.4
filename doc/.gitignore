@@ -1,0 +1,9 @@
+stress.dvi
+stress.pdf
+stress.ps
+stress.html
+stress.t2d
+stress.t2p
+*libs/*
+*.lo
+vti.tmp

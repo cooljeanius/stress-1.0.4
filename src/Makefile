@@ -48,18 +48,19 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_triplet = x86_64-apple-darwin11.4.2
-host_triplet = x86_64-apple-darwin11.4.2
-target_triplet = x86_64-apple-darwin11.4.2
+build_triplet = x86_64-apple-darwin12.3.0
+host_triplet = x86_64-apple-darwin12.3.0
+target_triplet = x86_64-apple-darwin12.3.0
 bin_PROGRAMS = stress$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
-	$(top_srcdir)/depcomp
+	$(top_srcdir)/build-aux/depcomp
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_spec_package_version.m4 \
 	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/ltoptions.m4 \
 	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
-	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/m4/pkg.m4 \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
@@ -88,7 +89,7 @@ am__v_at_ = $(am__v_at_$(AM_DEFAULT_VERBOSITY))
 am__v_at_0 = @
 am__v_at_1 = 
 DEFAULT_INCLUDES = -I. -I$(top_builddir)
-depcomp = $(SHELL) $(top_srcdir)/depcomp
+depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
@@ -136,13 +137,13 @@ am__define_uniq_tagged_files = \
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /private/var/root/Downloads/stress-1.0.4/missing aclocal-1.13
+ACLOCAL = ${SHELL} /Users/egall/stress-1.0.4/build-aux/missing aclocal-1.13
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
-AUTOCONF = ${SHELL} /private/var/root/Downloads/stress-1.0.4/missing autoconf
-AUTOHEADER = ${SHELL} /private/var/root/Downloads/stress-1.0.4/missing autoheader
-AUTOMAKE = ${SHELL} /private/var/root/Downloads/stress-1.0.4/missing automake-1.13
+AUTOCONF = ${SHELL} /Users/egall/stress-1.0.4/build-aux/missing autoconf
+AUTOHEADER = ${SHELL} /Users/egall/stress-1.0.4/build-aux/missing autoheader
+AUTOMAKE = ${SHELL} /Users/egall/stress-1.0.4/build-aux/missing automake-1.13
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -162,11 +163,11 @@ DUMPBIN =
 ECHO_C = \c
 ECHO_N = 
 ECHO_T = 
-EGREP = /usr/bin/grep -E
+EGREP = /opt/local/bin/grep -E
 EXEEXT = 
-FGREP = /usr/bin/grep -F
-GREP = /usr/bin/grep
-INSTALL = /usr/bin/install -c
+FGREP = /opt/local/bin/grep -F
+GREP = /opt/local/bin/grep
+INSTALL = /opt/local/bin/ginstall -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
@@ -180,10 +181,10 @@ LIPO = lipo
 LN_S = ln -s
 LTLIBOBJS = 
 MAINT = #
-MAKEINFO = ${SHELL} /private/var/root/Downloads/stress-1.0.4/missing makeinfo
+MAKEINFO = ${SHELL} /Users/egall/stress-1.0.4/build-aux/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /opt/local/bin/gmkdir -p
-NM = /usr/bin/nm
+NM = /opt/local/bin/nm
 NMEDIT = nmedit
 OBJDUMP = false
 OBJEXT = o
@@ -206,10 +207,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = strip
 VERSION = \"1.0.4\"
-abs_builddir = /private/var/root/Downloads/stress-1.0.4/src
-abs_srcdir = /private/var/root/Downloads/stress-1.0.4/src
-abs_top_builddir = /private/var/root/Downloads/stress-1.0.4
-abs_top_srcdir = /private/var/root/Downloads/stress-1.0.4
+abs_builddir = /Users/egall/stress-1.0.4/src
+abs_srcdir = /Users/egall/stress-1.0.4/src
+abs_top_builddir = /Users/egall/stress-1.0.4
+abs_top_srcdir = /Users/egall/stress-1.0.4
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -220,10 +221,10 @@ am__quote =
 am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
 bindir = ${exec_prefix}/bin
-build = x86_64-apple-darwin11.4.2
+build = x86_64-apple-darwin12.3.0
 build_alias = 
 build_cpu = x86_64
-build_os = darwin11.4.2
+build_os = darwin12.3.0
 build_vendor = apple
 builddir = .
 datadir = ${datarootdir}
@@ -231,15 +232,15 @@ datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-host = x86_64-apple-darwin11.4.2
+host = x86_64-apple-darwin12.3.0
 host_alias = 
 host_cpu = x86_64
-host_os = darwin11.4.2
+host_os = darwin12.3.0
 host_vendor = apple
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /private/var/root/Downloads/stress-1.0.4/install-sh
+install_sh = ${SHELL} /Users/egall/stress-1.0.4/build-aux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -255,10 +256,10 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
 sysconfdir = ${prefix}/etc
-target = x86_64-apple-darwin11.4.2
+target = x86_64-apple-darwin12.3.0
 target_alias = 
 target_cpu = x86_64
-target_os = darwin11.4.2
+target_os = darwin12.3.0
 target_vendor = apple
 top_build_prefix = ../
 top_builddir = ..
@@ -280,9 +281,9 @@ $(srcdir)/Makefile.in: # $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu src/Makefile
+	  $(AUTOMAKE) --foreign src/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
