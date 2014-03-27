@@ -5,6 +5,10 @@ See the end for copying conditions.
 Please send `stress' bug reports, questions, and suggestions to
 <apw@rossby.metr.ou.edu>.
 
+2010-03-19  Version 1.0.4
+
+ * Fix errors and error messages related to unlink.
+
 2010-02-17  Version 1.0.3
 
  * Fix manpage problem reported by Mark Lumsden.  Remove --no-clean

@@ -1,3 +1,5 @@
+AUTOMAKE_OPTIONS = 1.13.1 gnits
+
 ACLOCAL_AMFLAGS = -I m4 --install
 
 DISTCLEANFILES = *~ autoscan.log .DS_Store
@@ -17,12 +19,15 @@ CVSBIN = @CVSBIN@
 AUTOSCAN = @AUTOSCAN@
 
 ## TODO: remove the assumption about who the author is:
+## (tabs are required by format required for rcs2log's '-u' flag)
 ChangeLog: Log.cvs
-	$(RCS2LOG) -u "apw Amos Waterland apw@rossby.metr.ou.edu" -L $^ | \
-		sed 's,/home/apw/cvsroot/stress/src/,,g' | fmt -w 78 > $@
+	$(RCS2LOG) -u "apw	Amos Waterland	apw@rossby.metr.ou.edu"  \
+		-c -i 4 -l 75 t 4 -v -L $^ |  \
+		sed 's,/home/apw/cvsroot/stress/src/,,g' |  \
+		fmt -w 75 > $@
 
 Log.cvs: NEWS
-	$(CVSBIN) log > $@
+	$(CVSBIN) log > $@ || date > $@
 
 docs:
 	$(MAKE) -C doc

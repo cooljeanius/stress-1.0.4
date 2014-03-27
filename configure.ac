@@ -7,7 +7,7 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CANONICAL_TARGET dnl# also calls the "_HOST" version
-AM_INIT_AUTOMAKE([1.13.1 foreign])
+AM_INIT_AUTOMAKE([1.13.1 gnits])
 AM_MAINTAINER_MODE
 AM_SANITY_CHECK
 dnl# AX_* macros come from the autoconf-archive package:

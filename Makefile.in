@@ -79,10 +79,11 @@ build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
 subdir = .
-DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
+DIST_COMMON = INSTALL NEWS README AUTHORS ChangeLog THANKS \
+	$(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
-	$(srcdir)/config.h.in AUTHORS COPYING ChangeLog NEWS README \
-	TODO $(top_srcdir)/build-aux/compile \
+	$(srcdir)/config.h.in COPYING TODO \
+	$(top_srcdir)/build-aux/compile \
 	$(top_srcdir)/build-aux/config.guess \
 	$(top_srcdir)/build-aux/config.sub \
 	$(top_srcdir)/build-aux/install-sh \
@@ -338,6 +339,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+AUTOMAKE_OPTIONS = 1.13.1 gnits
 ACLOCAL_AMFLAGS = -I m4 --install
 DISTCLEANFILES = *~ autoscan.log .DS_Store
 MAINTAINERCLEANFILES = install-sh mkinstalldirs missing Makefile.in \
@@ -356,15 +358,15 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
-	      echo ' cd $(srcdir) && $(AUTOMAKE) --foreign'; \
-	      $(am__cd) $(srcdir) && $(AUTOMAKE) --foreign \
+	      echo ' cd $(srcdir) && $(AUTOMAKE) --gnits'; \
+	      $(am__cd) $(srcdir) && $(AUTOMAKE) --gnits \
 		&& exit 0; \
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnits Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign Makefile
+	  $(AUTOMAKE) --gnits Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -516,6 +518,12 @@ distclean-tags:
 	-rm -f cscope.out cscope.in.out cscope.po.out cscope.files
 
 distdir: $(DISTFILES)
+	@case `sed 15q $(srcdir)/NEWS` in \
+	*"$(VERSION)"*) : ;; \
+	*) \
+	  echo "NEWS not updated; not releasing" 1>&2; \
+	  exit 1;; \
+	esac
 	$(am__remove_distdir)
 	test -d "$(distdir)" || mkdir "$(distdir)"
 	@srcdirstrip=`echo "$(srcdir)" | sed 's/[].[^$$\\*]/\\\\&/g'`; \
@@ -831,11 +839,11 @@ uninstall-am:
 
 
 ChangeLog: Log.cvs
-	$(RCS2LOG) -u "apw Amos Waterland apw@rossby.metr.ou.edu" -L $^ | \
+	$(RCS2LOG) -u "apw	Amos Waterland	apw@rossby.metr.ou.edu" -L $^ | \
 		sed 's,/home/apw/cvsroot/stress/src/,,g' | fmt -w 78 > $@
 
 Log.cvs: NEWS
-	$(CVSBIN) log > $@
+	$(CVSBIN) log > $@ || date > $@
 
 docs:
 	$(MAKE) -C doc

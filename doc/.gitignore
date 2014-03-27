@@ -9,4 +9,3 @@ stress.t2p
 *.lo
 vti.tmp
 Makefile
-src/Makefile
