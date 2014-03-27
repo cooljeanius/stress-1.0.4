@@ -1,21 +1,18 @@
-AUTOMAKE_OPTIONS = 1.13.1 gnits
+AUTOMAKE_OPTIONS = 1.14 gnits
 
 ACLOCAL_AMFLAGS = -I m4 --install
 
 DISTCLEANFILES = *~ autoscan.log .DS_Store
-MAINTAINERCLEANFILES = install-sh mkinstalldirs missing Makefile.in \
-                       aclocal.m4 configure COPYING Log.cvs ChangeLog \
-                       depcomp configure.scan
+MAINTAINERCLEANFILES = install-sh mkinstalldirs missing \
+                       Log.cvs depcomp configure.scan
 
-EXTRA_DIST = ChangeLog
+EXTRA_DIST = ChangeLog .last-cl-gen Makefile.spec
 
 SUBDIRS = . src doc test build-aux m4
 
 VERSION = @VERSION@
 PACKAGE = @PACKAGE@
 
-RCS2LOG = @RCS2LOG@
-CVSBIN = @CVSBIN@
 AUTOSCAN = @AUTOSCAN@
 
 ## Used to be generated via CVS, but we are now using git:
@@ -49,3 +46,9 @@ configure.scan: src/stress.c
 
 distclean-local:
 	-rm -rf autom4te.cache || rmdir autom4te.cache
+
+maintainerclean-local:
+	-rm -rf $(PACKAGE)-$(VERSION) || rmdir $(PACKAGE)-$(VERSION)
+
+check-local: configure.scan
+	@test -x src/stress || true

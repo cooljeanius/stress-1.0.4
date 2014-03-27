@@ -325,7 +325,7 @@ top_srcdir = @top_srcdir@
 info_TEXINFOS = stress.texi
 man_MANS = stress.1
 EXTRA_DIST = $(man_MANS) stress.html
-MAINTAINERCLEANFILES = Makefile.in mdate-sh texinfo.tex stress.html $(man_MANS)
+MAINTAINERCLEANFILES = mdate-sh texinfo.tex stress.html stress.info.html $(man_MANS)
 all: all-am
 
 .SUFFIXES:

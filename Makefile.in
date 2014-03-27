@@ -337,17 +337,14 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-AUTOMAKE_OPTIONS = 1.13.1 gnits
+AUTOMAKE_OPTIONS = 1.14 gnits
 ACLOCAL_AMFLAGS = -I m4 --install
 DISTCLEANFILES = *~ autoscan.log .DS_Store
-MAINTAINERCLEANFILES = install-sh mkinstalldirs missing Makefile.in \
-                       aclocal.m4 configure COPYING Log.cvs ChangeLog \
-                       depcomp configure.scan
+MAINTAINERCLEANFILES = install-sh mkinstalldirs missing \
+                       Log.cvs depcomp configure.scan
 
-EXTRA_DIST = ChangeLog
+EXTRA_DIST = ChangeLog .last-cl-gen Makefile.spec
 SUBDIRS = . src doc test build-aux m4
-RCS2LOG = @RCS2LOG@
-CVSBIN = @CVSBIN@
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
@@ -712,6 +709,7 @@ distcleancheck: distclean
 	       $(distcleancheck_listfiles) ; \
 	       exit 1; } >&2
 check-am: all-am
+	$(MAKE) $(AM_MAKEFLAGS) check-local
 check: check-recursive
 all-am: Makefile config.h
 installdirs: installdirs-recursive
@@ -818,24 +816,24 @@ ps-am:
 
 uninstall-am:
 
-.MAKE: $(am__recursive_targets) all install-am install-strip
+.MAKE: $(am__recursive_targets) all check-am install-am install-strip
 
 .PHONY: $(am__recursive_targets) CTAGS GTAGS TAGS all all-am \
-	am--refresh check check-am clean clean-cscope clean-generic \
-	clean-libtool cscope cscopelist-am ctags ctags-am dist \
-	dist-all dist-bzip2 dist-gzip dist-lzip dist-shar dist-tarZ \
-	dist-xz dist-zip distcheck distclean distclean-generic \
-	distclean-hdr distclean-libtool distclean-local distclean-tags \
-	distcleancheck distdir distuninstallcheck dvi dvi-am html \
-	html-am info info-am install install-am install-data \
-	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-html install-html-am install-info \
-	install-info-am install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs installdirs-am maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-am uninstall \
-	uninstall-am
+	am--refresh check check-am check-local clean clean-cscope \
+	clean-generic clean-libtool cscope cscopelist-am ctags \
+	ctags-am dist dist-all dist-bzip2 dist-gzip dist-lzip \
+	dist-shar dist-tarZ dist-xz dist-zip distcheck distclean \
+	distclean-generic distclean-hdr distclean-libtool \
+	distclean-local distclean-tags distcleancheck distdir \
+	distuninstallcheck dvi dvi-am html html-am info info-am \
+	install install-am install-data install-data-am install-dvi \
+	install-dvi-am install-exec install-exec-am install-html \
+	install-html-am install-info install-info-am install-man \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-strip installcheck installcheck-am installdirs \
+	installdirs-am maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-generic mostlyclean-libtool pdf pdf-am \
+	ps ps-am tags tags-am uninstall uninstall-am
 
 
 ChangeLog: $(srcdir)/build-aux/gitlog-to-changelog $(srcdir)/.last-cl-gen
@@ -868,6 +866,12 @@ configure.scan: src/stress.c
 
 distclean-local:
 	-rm -rf autom4te.cache || rmdir autom4te.cache
+
+maintainerclean-local:
+	-rm -rf $(PACKAGE)-$(VERSION) || rmdir $(PACKAGE)-$(VERSION)
+
+check-local: configure.scan
+	@test -x src/stress || true
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
