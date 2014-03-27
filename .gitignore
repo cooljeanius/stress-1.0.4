@@ -13,5 +13,6 @@ stamp-h*
 */*deps/*.*o
 */*/*deps/*.*o
 config.h
-src/stress
 Makefile
+conftest*
+confdefs.h

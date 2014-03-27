@@ -635,6 +635,8 @@ ac_includes_default="\
 ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
+BUILD_STATICLIB_FALSE
+BUILD_STATICLIB_TRUE
 STATIC_LD
 LIBOBJS
 ac_cv_sys_large_files
@@ -16992,7 +16994,17 @@ if test "x${staticlib}" = "xyes"; then
     fi
 fi
 
-ac_config_files="$ac_config_files Makefile src/Makefile doc/Makefile test/Makefile"
+ if test "x${STATIC_LD}" = "x-static"; then
+  BUILD_STATICLIB_TRUE=
+  BUILD_STATICLIB_FALSE='#'
+else
+  BUILD_STATICLIB_TRUE='#'
+  BUILD_STATICLIB_FALSE=
+fi
+
+
+ac_config_files="$ac_config_files Makefile src/Makefile doc/Makefile test/Makefile build-aux/Makefile m4/Makefile"
+
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -17144,6 +17156,10 @@ if test -z "${am__fastdepCXX_TRUE}" && test -z "${am__fastdepCXX_FALSE}"; then
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 
+if test -z "${BUILD_STATICLIB_TRUE}" && test -z "${BUILD_STATICLIB_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_STATICLIB\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 
 : "${CONFIG_STATUS=./config.status}"
 ac_write_fail=0
@@ -18118,6 +18134,8 @@ do
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
     "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
     "test/Makefile") CONFIG_FILES="$CONFIG_FILES test/Makefile" ;;
+    "build-aux/Makefile") CONFIG_FILES="$CONFIG_FILES build-aux/Makefile" ;;
+    "m4/Makefile") CONFIG_FILES="$CONFIG_FILES m4/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

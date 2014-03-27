@@ -76,5 +76,13 @@ if test "x${staticlib}" = "xyes"; then
     fi
 fi
 
-AC_CONFIG_FILES([Makefile src/Makefile doc/Makefile test/Makefile])
+AM_CONDITIONAL([BUILD_STATICLIB],[test "x${STATIC_LD}" = "x-static"])
+
+AC_CONFIG_FILES([Makefile \
+src/Makefile \
+doc/Makefile \
+test/Makefile \
+build-aux/Makefile \
+m4/Makefile])
+
 AC_OUTPUT

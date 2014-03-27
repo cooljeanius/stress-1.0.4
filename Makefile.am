@@ -1,10 +1,13 @@
 ACLOCAL_AMFLAGS = -I m4 --install
 
+DISTCLEANFILES = *~ autoscan.log .DS_Store
 MAINTAINERCLEANFILES = install-sh mkinstalldirs missing Makefile.in \
-                       aclocal.m4 configure COPYING Log.cvs ChangeLog depcomp
+                       aclocal.m4 configure COPYING Log.cvs ChangeLog \
+                       depcomp configure.scan
+
 EXTRA_DIST = ChangeLog
 
-SUBDIRS = . src doc test
+SUBDIRS = . src doc test build-aux m4
 
 VERSION = @VERSION@
 PACKAGE = @PACKAGE@
@@ -21,3 +24,9 @@ docs:
 
 tests:
 	$(MAKE) -C test
+
+configure.scan:
+	autoscan
+
+distclean-local:
+	-rm -rf autom4te.cache || rmdir autom4te.cache

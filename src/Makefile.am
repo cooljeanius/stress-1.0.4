@@ -1,3 +1,5 @@
+DISTCLEANFILES = .DS_Store
+
 MAINTAINERCLEANFILES = Makefile.in
 
 VERSION = \"@VERSION@\"
@@ -10,3 +12,9 @@ AM_CFLAGS = -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPACKAGE=${PACKAGE} -DVE
 bin_PROGRAMS = stress
 stress_SOURCES = stress.c
 stress_MANS = stress.1
+
+if BUILD_STATICLIB
+lib_LIBRARIES = libstress.a
+libstress_a_SOURCES = stress.c
+endif
+## (end BUILD_STATICLIB)
