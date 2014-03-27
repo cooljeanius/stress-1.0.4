@@ -1,3 +1,58 @@
+2014-03-27  Eric Gallager  <egall@gwmail.gwu.edu>
+
+    regenerate changelog with git now instead of cvs
+
+2014-03-27  Eric Gallager  <egall@gwmail.gwu.edu>
+
+    change automake strictness to gnits
+
+2014-03-27  Eric Gallager  <egall@gwmail.gwu.edu>
+
+    ignore output from less-often used Makefile targets
+
+    also remove old configure.in that has been replaced by configure.ac
+
+2014-03-27  Eric Gallager  <egall@gwmail.gwu.edu>
+
+    replace some hardcoded commands in Makefiles with variables
+
+2014-03-27  Eric Gallager  <egall@gwmail.gwu.edu>
+
+    make the "--enable-staticlib" configure flag actually do something
+
+    whether stress actually works when built as a static library like this
+    remains untested
+
+2014-03-27  Eric Gallager  <egall@gwmail.gwu.edu>
+
+    make distclean
+
+2014-03-27  Eric Gallager  <egall@gwmail.gwu.edu>
+
+    autotools update
+
+    also edit the source file to conform to my personal style preferences
+
+2013-05-13  Eric Gallager  <egall@gwmail.gwu.edu>
+
+    a few minor changes
+
+2013-05-13  Eric Gallager  <egall@gwmail.gwu.edu>
+
+    gitignore change
+
+2013-05-13  Eric Gallager  <egall@gwmail.gwu.edu>
+
+    deleting more regeneratable stuff
+
+2013-05-13  Eric Gallager  <egall@gwmail.gwu.edu>
+
+    rejigger build system some more
+
+2013-05-13  Eric Gallager  <egall@gwmail.gwu.edu>
+
+    move around stuff in build system
+
 
 2010-03-19  Amos Waterland  <apw@rossby.metr.ou.edu>
 

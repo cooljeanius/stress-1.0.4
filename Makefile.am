@@ -20,6 +20,7 @@ AUTOSCAN = @AUTOSCAN@
 
 ## Used to be generated via CVS, but we are now using git:
 ChangeLog: $(srcdir)/build-aux/gitlog-to-changelog $(srcdir)/.last-cl-gen
+	$(MAKE) .last-cl-gen
 	if test -d $(srcdir)/.git; then                  \
 	  $(srcdir)/build-aux/gitlog-to-changelog        \
 	      --format='%s%n%n%b%n' --no-cluster         \
@@ -32,17 +33,10 @@ ChangeLog: $(srcdir)/build-aux/gitlog-to-changelog $(srcdir)/.last-cl-gen
 	  && rm -f ChangeLog.tmp;                        \
 	fi
 
-.last-cl-gen: Log.cvs
-	if test -d $(srcdir)/.git; then      \
-	  if test ! -e $@ -a -e $<; then     \
-	    git mv -v $< $@;                 \
-	  else                               \
-	    git rev-list -n 1 HEAD | tee $@; \
-	  fi;                                \
+.last-cl-gen: NEWS
+	if test -d $(srcdir)/.git; then    \
+	  git rev-list -n 1 HEAD | tee $@; \
 	fi
-
-Log.cvs: NEWS
-	date > $@
 
 docs:
 	$(MAKE) -C doc
