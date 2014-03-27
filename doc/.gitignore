@@ -2,8 +2,11 @@ stress.dvi
 stress.pdf
 stress.ps
 stress.html
+stress.info.html
 stress.t2d
 stress.t2p
 *libs/*
 *.lo
 vti.tmp
+Makefile
+src/Makefile

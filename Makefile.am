@@ -1,4 +1,4 @@
-ACLOCAL_AMFLAGS = -I m4
+ACLOCAL_AMFLAGS = -I m4 --install
 
 MAINTAINERCLEANFILES = install-sh mkinstalldirs missing Makefile.in \
                        aclocal.m4 configure COPYING Log.cvs ChangeLog depcomp
@@ -15,3 +15,9 @@ ChangeLog: Log.cvs
 
 Log.cvs:
 	cvs log > $@
+
+docs:
+	$(MAKE) -C doc
+
+tests:
+	$(MAKE) -C test

@@ -6,51 +6,74 @@ AC_CONFIG_SRCDIR([src/stress.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
-AC_CANONICAL_HOST
-AC_CANONICAL_TARGET
-AM_INIT_AUTOMAKE([foreign])
+AC_CANONICAL_TARGET dnl# also calls the "_HOST" version
+AM_INIT_AUTOMAKE([1.13.1 foreign])
 AM_MAINTAINER_MODE
 AM_SANITY_CHECK
-dnl# AX_* macros require the autoconf-archive package
+dnl# AX_* macros come from the autoconf-archive package:
 AX_SPEC_PACKAGE_AND_VERSION([Makefile.spec])
 
 dnl# Checks for programs.
 AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_GCC_TRADITIONAL
-AC_PROG_RANLIB
 PKG_PROG_PKG_CONFIG
-LT_INIT
+AC_PATH_PROG([HELP2MAN],[help2man],[:],[${PATH}:/opt/local/bin:/sw/bin])
+AM_MISSING_PROG([HELP2MAN],[help2man])
+AC_SUBST([HELP2MAN])
+AC_PATH_PROG([MAKEINFO],[makeinfo],[],[/sw/opt/texinfo-legacy/bin:${PATH}])
+AM_MISSING_PROG([MAKEINFO],[makeinfo])
+AC_SUBST([MAKEINFO])
+LT_INIT([disable-static])
 LTVERSION_VERSION
 
+# keep autoscan happy:
+if test "x" = "y"; then
+  test -x `which autoscan`
+  AC_PROG_RANLIB
+fi
+
 dnl# Checks for libraries.
+LT_LIB_M
 AC_CHECK_LIB([m],[sqrt])
 AC_CHECK_LIB([gen],[basename])
 
 dnl# Checks for header files.
-AC_HEADER_STDC
-AC_CHECK_HEADERS([ctype.h errno.h libgen.h math.h stdio.h stdlib.h string.h signal.h time.h unistd.h sys/wait.h])
+AC_HEADER_SYS_WAIT
+AC_CHECK_HEADERS([ctype.h errno.h libgen.h math.h stdio.h signal.h time.h])
 
 dnl# Checks for typedefs, structures, and compiler characteristics.
+AC_SYS_LARGEFILE
+AC_SUBST([ac_cv_sys_largefile_CC])
+AC_SUBST([ac_cv_sys_file_offset_bits])
+AC_SUBST([ac_cv_sys_large_files])
+AC_C_BIGENDIAN
 AC_C_CONST
+AC_C_PROTOTYPES
+AC_CHECK_TYPES([long long])
 
 dnl# Checks for library functions.
 AC_FUNC_FORK
 AC_FUNC_MALLOC
-AC_CHECK_FUNCS([alarm sqrt strerror])
+AC_CHECK_FUNCS([alarm close exit fflush fprintf free getpid kill mkstemp \
+                perror rand signal sleep sqrt sscanf strcmp strerror sync \
+                time unlink usleep wait write])
 
 dnl# Options that alter compile and link.
-AC_ARG_ENABLE([static],
-               [AS_HELP_STRING([--enable-static],[build static library @<:@default=no@:>@])],
-               [static=$enableval],
-               [static=no])
+dnl# change name to avoid conflict with the libtool-provided one:
+AC_ARG_ENABLE([staticlib],
+               [AS_HELP_STRING([--enable-staticlib],[build static library @<:@default=no@:>@])],
+               [staticlib=${enableval}],
+               [staticlib=no])
 
-if test "$static" = yes; then
-        # if we're using gcc, add `-static' to LDFLAGS
-        if test -n "$GCC" || test "$ac_cv_c_compiler_gnu" = "yes"; then
-                STATIC_LD="-static"
-                LDFLAGS="$LDFLAGS -static"
-        fi
+if test "x${staticlib}" = "xyes"; then
+    # if we are using gcc, add `-static' to LDFLAGS
+    if test -n "${GCC}" || test "x${ac_cv_c_compiler_gnu}" = "xyes"; then
+        export STATIC_LD="-static"
+        export LDFLAGS="${LDFLAGS} -static"
+        AC_SUBST([STATIC_LD])
+        AC_SUBST([LDFLAGS])
+    fi
 fi
 
 AC_CONFIG_FILES([Makefile src/Makefile doc/Makefile test/Makefile])
