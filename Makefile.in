@@ -217,7 +217,6 @@ CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
-CVSBIN = @CVSBIN@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
@@ -272,7 +271,6 @@ PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 RANLIB = @RANLIB@
-RCS2LOG = @RCS2LOG@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
@@ -348,6 +346,8 @@ MAINTAINERCLEANFILES = install-sh mkinstalldirs missing Makefile.in \
 
 EXTRA_DIST = ChangeLog
 SUBDIRS = . src doc test build-aux m4
+RCS2LOG = @RCS2LOG@
+CVSBIN = @CVSBIN@
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
@@ -838,12 +838,30 @@ uninstall-am:
 	uninstall-am
 
 
-ChangeLog: Log.cvs
-	$(RCS2LOG) -u "apw	Amos Waterland	apw@rossby.metr.ou.edu" -L $^ | \
-		sed 's,/home/apw/cvsroot/stress/src/,,g' | fmt -w 78 > $@
+ChangeLog: $(srcdir)/build-aux/gitlog-to-changelog $(srcdir)/.last-cl-gen
+	if test -d $(srcdir)/.git; then                  \
+	  $(srcdir)/build-aux/gitlog-to-changelog        \
+	      --format='%s%n%n%b%n' --no-cluster         \
+	      --strip-tab --strip-cherry-pick            \
+	      -- $$(cat $(srcdir)/.last-cl-gen)..        \
+	    | fmt -w 75 -t 4 > ChangeLog.tmp             \
+	  && (echo; cat $(srcdir)/ChangeLog | tab2space) \
+	  >> ChangeLog.tmp                               \
+	  && mv -f ChangeLog.tmp $(srcdir)/ChangeLog     \
+	  && rm -f ChangeLog.tmp;                        \
+	fi
+
+.last-cl-gen: Log.cvs
+	if test -d $(srcdir)/.git; then      \
+	  if test ! -e $@ -a -e $<; then     \
+	    git mv -v $< $@;                 \
+	  else                               \
+	    git rev-list -n 1 HEAD | tee $@; \
+	  fi;                                \
+	fi
 
 Log.cvs: NEWS
-	$(CVSBIN) log > $@ || date > $@
+	date > $@
 
 docs:
 	$(MAKE) -C doc
