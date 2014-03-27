@@ -33,7 +33,7 @@ ChangeLog: $(srcdir)/build-aux/gitlog-to-changelog $(srcdir)/.last-cl-gen
 	  && rm -f ChangeLog.tmp;                        \
 	fi
 
-.last-cl-gen: NEWS
+.last-cl-gen: NEWS $(srcdir)/.git/COMMIT_EDITMSG
 	if test -d $(srcdir)/.git; then    \
 	  git rev-list -n 1 HEAD | tee $@; \
 	fi
