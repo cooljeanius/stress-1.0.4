@@ -2431,6 +2431,15 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 ac_config_headers="$ac_config_headers config.h"
 
 
+if test ! -e build-aux/install-sh; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: install-sh is not present; autoreconf-ing for you" >&5
+$as_echo "$as_me: install-sh is not present; autoreconf-ing for you" >&6;}
+  autoreconf -fvi -Wall
+  { $as_echo "$as_me:${as_lineno-$LINENO}: done. Exiting so you can try to configure again." >&5
+$as_echo "$as_me: done. Exiting so you can try to configure again." >&6;}
+  exit 1
+fi
+
 ac_aux_dir=
 for ac_dir in build-aux "$srcdir"/build-aux; do
   if test -f "$ac_dir/install-sh"; then

@@ -5,6 +5,13 @@ AC_INIT([stress],[1.0.4],[apw@rossby.metr.ou.edu])
 AC_CONFIG_SRCDIR([src/stress.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
+if test ! -e build-aux/install-sh; then
+  AC_MSG_NOTICE([install-sh is not present; autoreconf-ing for you])
+  autoreconf -fvi -Wall
+  AC_MSG_NOTICE([done. Exiting so you can try to configure again.])
+  exit 1
+fi
+
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CANONICAL_TARGET dnl# also calls the "_HOST" version
 dnl# need a line of whitespace:
