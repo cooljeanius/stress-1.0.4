@@ -209,12 +209,14 @@ AR = @AR@
 AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
+AUTOSCAN = @AUTOSCAN@
 AWK = @AWK@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
+CVSBIN = @CVSBIN@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
@@ -269,6 +271,7 @@ PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 RANLIB = @RANLIB@
+RCS2LOG = @RCS2LOG@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
@@ -828,11 +831,11 @@ uninstall-am:
 
 
 ChangeLog: Log.cvs
-	rcs2log -u "apw	Amos Waterland	apw@rossby.metr.ou.edu" -L $^ | \
+	$(RCS2LOG) -u "apw Amos Waterland apw@rossby.metr.ou.edu" -L $^ | \
 		sed 's,/home/apw/cvsroot/stress/src/,,g' | fmt -w 78 > $@
 
 Log.cvs:
-	cvs log > $@
+	$(CVSBIN) log > $@
 
 docs:
 	$(MAKE) -C doc
@@ -841,7 +844,7 @@ tests:
 	$(MAKE) -C test
 
 configure.scan:
-	autoscan
+	$(AUTOSCAN)
 
 distclean-local:
 	-rm -rf autom4te.cache || rmdir autom4te.cache

@@ -12,12 +12,17 @@ SUBDIRS = . src doc test build-aux m4
 VERSION = @VERSION@
 PACKAGE = @PACKAGE@
 
+RCS2LOG = @RCS2LOG@
+CVSBIN = @CVSBIN@
+AUTOSCAN = @AUTOSCAN@
+
+## TODO: remove the assumption about who the author is:
 ChangeLog: Log.cvs
-	rcs2log -u "apw	Amos Waterland	apw@rossby.metr.ou.edu" -L $^ | \
+	$(RCS2LOG) -u "apw Amos Waterland apw@rossby.metr.ou.edu" -L $^ | \
 		sed 's,/home/apw/cvsroot/stress/src/,,g' | fmt -w 78 > $@
 
 Log.cvs:
-	cvs log > $@
+	$(CVSBIN) log > $@
 
 docs:
 	$(MAKE) -C doc
@@ -26,7 +31,7 @@ tests:
 	$(MAKE) -C test
 
 configure.scan:
-	autoscan
+	$(AUTOSCAN)
 
 distclean-local:
 	-rm -rf autom4te.cache || rmdir autom4te.cache

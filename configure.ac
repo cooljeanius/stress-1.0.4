@@ -24,6 +24,13 @@ AC_SUBST([HELP2MAN])
 AC_PATH_PROG([MAKEINFO],[makeinfo],[],[/sw/opt/texinfo-legacy/bin:${PATH}])
 AM_MISSING_PROG([MAKEINFO],[makeinfo])
 AC_SUBST([MAKEINFO])
+AC_PATH_PROG([RCS2LOG],[rcs2log],[:],[${PATH}:/opt/local/bin])
+AC_SUBST([RCS2LOG])
+AC_PATH_PROG([CVSBIN],[cvs],[:],[${PATH}:/opt/local/bin])
+AC_SUBST([CVSBIN])
+AC_PATH_PROG([AUTOSCAN],[autoscan autoscan-2.69 autoscan264 autoscan263 autoscan213],[touch configure.scan],
+             [${PATH}:/opt/local/bin:/sw/bin:/sw/lib/autoconf2.13/bin])
+AC_SUBST([AUTOSCAN])
 LT_INIT([disable-static])
 LTVERSION_VERSION
 

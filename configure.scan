@@ -29,7 +29,9 @@ AC_FUNC_MALLOC
 AC_CHECK_FUNCS([alarm sqrt strerror])
 
 AC_CONFIG_FILES([Makefile
+                 build-aux/Makefile
                  doc/Makefile
+                 m4/Makefile
                  src/Makefile
                  test/Makefile])
 AC_OUTPUT
