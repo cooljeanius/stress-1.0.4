@@ -16,3 +16,11 @@ config.h
 Makefile
 conftest*
 confdefs.h
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+ID
+TAGS
+cscope.files
+cscope*.out

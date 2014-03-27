@@ -1,3 +1,4 @@
 Makefile
 stress
 lib*.a
+TAGS

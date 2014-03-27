@@ -21,7 +21,7 @@ ChangeLog: Log.cvs
 	$(RCS2LOG) -u "apw Amos Waterland apw@rossby.metr.ou.edu" -L $^ | \
 		sed 's,/home/apw/cvsroot/stress/src/,,g' | fmt -w 78 > $@
 
-Log.cvs:
+Log.cvs: NEWS
 	$(CVSBIN) log > $@
 
 docs:
@@ -30,7 +30,7 @@ docs:
 tests:
 	$(MAKE) -C test
 
-configure.scan:
+configure.scan: src/stress.c
 	$(AUTOSCAN)
 
 distclean-local:
