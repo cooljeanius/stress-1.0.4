@@ -7,9 +7,15 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 if test ! -e build-aux/install-sh; then
   AC_MSG_NOTICE([install-sh is not present; autoreconf-ing for you])
-  autoreconf -fvi -Wall
+  AC_PATH_PROGS([AUTORECONF],[autoreconf autoreconf-2.69 autoreconf264 autoreconf263 autoreconf213],
+               [AC_MSG_ERROR([autoreconfing is necessary but impossible])],
+               [${PATH}:/opt/local/bin:/sw/bin:/sw/lib/autoconf2.13/bin])
+  ${AUTORECONF} -fvi -Wall
   AC_MSG_NOTICE([done. Exiting so you can try to configure again.])
   exit 1
+else
+  test ! -z "${AUTORECONF}" && export AUTORECONF
+  AC_SUBST([AUTORECONF])
 fi
 
 AC_CONFIG_AUX_DIR([build-aux])
@@ -37,7 +43,7 @@ AC_SUBST([HELP2MAN])
 AC_PATH_PROG([MAKEINFO],[makeinfo],[],[/sw/opt/texinfo-legacy/bin:${PATH}])
 AM_MISSING_PROG([MAKEINFO],[makeinfo])
 AC_SUBST([MAKEINFO])
-AC_PATH_PROG([AUTOSCAN],[autoscan autoscan-2.69 autoscan264 autoscan263 autoscan213],[touch configure.scan],
+AC_PATH_PROGS([AUTOSCAN],[autoscan autoscan-2.69 autoscan264 autoscan263 autoscan213],[touch configure.scan],
              [${PATH}:/opt/local/bin:/sw/bin:/sw/lib/autoconf2.13/bin])
 AC_SUBST([AUTOSCAN])
 LT_INIT([disable-static])
