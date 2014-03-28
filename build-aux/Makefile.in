@@ -80,8 +80,7 @@ host_triplet = @host@
 target_triplet = @target@
 subdir = build-aux
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am compile \
-	config.guess config.sub depcomp install-sh mdate-sh missing \
-	texinfo.tex ltmain.sh
+	config.guess config.sub install-sh missing ltmain.sh
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_spec_file.m4 \
 	$(top_srcdir)/m4/ax_spec_package_version.m4 \
@@ -252,9 +251,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I../m4 --install
-MAINTAINERCLEANFILES = ltmain.sh compile config.guess config.sub depcomp \
-                       install-sh mdate-sh missing test-driver texinfo.tex
-
+MAINTAINERCLEANFILES = compile mdate-sh missing test-driver texinfo.tex
 all: all-am
 
 .SUFFIXES:

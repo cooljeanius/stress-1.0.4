@@ -1,10 +1,5 @@
 ./*
 compile
-config.guess
-config.sub
-depcomp
-install-sh
-ltmain.sh
 mdate-sh
 missing
 test-driver
