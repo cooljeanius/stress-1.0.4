@@ -10,7 +10,7 @@ if test ! -e build-aux/install-sh; then
   AC_PATH_PROGS([AUTORECONF],[autoreconf autoreconf-2.69 autoreconf264 autoreconf263 autoreconf213],
                [AC_MSG_ERROR([autoreconfing is necessary but impossible])],
                [${PATH}:/opt/local/bin:/sw/bin:/sw/lib/autoconf2.13/bin])
-  ${AUTORECONF} -fvi -Wall
+  cd ${srcdir} && ${AUTORECONF} -fvi -Wall
   AC_MSG_NOTICE([done. Exiting so you can try to configure again.])
   exit 1
 else

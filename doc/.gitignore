@@ -9,3 +9,5 @@ stress.t2p
 *.lo
 vti.tmp
 Makefile
+stress.1
+stress.info

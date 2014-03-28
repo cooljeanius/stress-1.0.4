@@ -6,7 +6,7 @@ DISTCLEANFILES = *~ autoscan.log .DS_Store
 MAINTAINERCLEANFILES = install-sh mkinstalldirs missing \
                        Log.cvs depcomp configure.scan
 
-EXTRA_DIST = ChangeLog .last-cl-gen Makefile.spec
+EXTRA_DIST = ChangeLog .last-cl-gen Makefile.spec README.md
 
 SUBDIRS = . src doc test build-aux m4
 

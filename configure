@@ -2482,7 +2482,7 @@ fi
 done
 test -n "$AUTORECONF" || AUTORECONF="as_fn_error $? "autoreconfing is necessary but impossible" "$LINENO" 5"
 
-  ${AUTORECONF} -fvi -Wall
+  cd ${srcdir} && ${AUTORECONF} -fvi -Wall
   { $as_echo "$as_me:${as_lineno-$LINENO}: done. Exiting so you can try to configure again." >&5
 $as_echo "$as_me: done. Exiting so you can try to configure again." >&6;}
   exit 1
