@@ -4,9 +4,7 @@ INSTALL
 See the INSTALL file for generic installation instructions.  The quick
 version is:
 
-    ./configure && ./configure && make && sudo make install
-
-(the second "`./configure`" might be necessary depending on cleanliness)
+    ./configure && make && sudo make install
 
 USAGE
 =====

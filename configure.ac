@@ -88,6 +88,7 @@ AC_ARG_ENABLE([staticlib],
                [staticlib=${enableval}],
                [staticlib=no])
 
+dnl# Warning: this can make "`make distcheck`" fail:
 if test "x${staticlib}" = "xyes"; then
     # if we are using gcc, add `-static' to LDFLAGS
     if test -n "${GCC}" || test "x${ac_cv_c_compiler_gnu}" = "xyes"; then

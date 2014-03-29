@@ -30,6 +30,9 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
+#include "../config.h"
+#include "stress.h"
+
 /* By default, print all messages of severity info and above.  */
 static int global_debug = 2;
 

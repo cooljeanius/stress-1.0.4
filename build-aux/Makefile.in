@@ -80,7 +80,8 @@ host_triplet = @host@
 target_triplet = @target@
 subdir = build-aux
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am compile \
-	config.guess config.sub depcomp install-sh missing ltmain.sh
+	config.guess config.sub depcomp install-sh mdate-sh missing \
+	texinfo.tex ltmain.sh
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_spec_file.m4 \
 	$(top_srcdir)/m4/ax_spec_package_version.m4 \
