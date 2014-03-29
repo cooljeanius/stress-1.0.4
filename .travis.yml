@@ -2,7 +2,7 @@ language: C
 
 install:
   # Prerequisites
-  -  "sudo apt-get install texinfo help2man cvs"
+  -  "sudo apt-get install texinfo help2man cvs rcs autoconf autoconf-doc"
 
 # try to build:
 script: ./configure --enable-staticlib && make && make check && make distcheck
