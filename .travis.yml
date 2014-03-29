@@ -1,5 +1,9 @@
 language: C
 
+install:
+  # Prerequisites
+  -  "sudo apt-get install texinfo help2man cvs"
+
 # try to build:
 script: ./configure --enable-staticlib && make && make check && make distcheck
 
