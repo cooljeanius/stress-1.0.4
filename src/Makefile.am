@@ -1,5 +1,3 @@
-DISTCLEANFILES = .DS_Store
-
 VERSION = \"@VERSION@\"
 PACKAGE = \"@PACKAGE@\"
 
@@ -10,6 +8,14 @@ AM_CFLAGS = -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPACKAGE=${PACKAGE} -DVE
 bin_PROGRAMS = stress
 stress_SOURCES = stress.c
 stress_MANS = stress.1
+
+EXTRA_DIST = $(stress_MANS) ../doc/stress.1
+DISTCLEANFILES = .DS_Store ../doc/stress.1
+MAINTAINERCLEANFILES = $(stress_MANS)
+
+stress.1: ../doc/stress.1
+	$(MAKE) -C ../doc stress.1
+	test -e ../doc/stress.1 && cp -v ../doc/stress.1 .
 
 if BUILD_STATICLIB
 lib_LIBRARIES = libstress.a

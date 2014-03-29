@@ -2432,7 +2432,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 ac_config_headers="$ac_config_headers config.h"
 
 
-if test ! -e build-aux/install-sh; then
+if test ! -e ${srcdir}/build-aux/install-sh; then
   { $as_echo "$as_me:${as_lineno-$LINENO}: install-sh is not present; autoreconf-ing for you" >&5
 $as_echo "$as_me: install-sh is not present; autoreconf-ing for you" >&6;}
   for ac_prog in autoreconf autoreconf-2.69 autoreconf264 autoreconf263 autoreconf213

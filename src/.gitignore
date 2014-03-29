@@ -2,3 +2,4 @@ Makefile
 stress
 lib*.a
 TAGS
+stress.1

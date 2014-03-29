@@ -340,12 +340,14 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-DISTCLEANFILES = .DS_Store
 AM_WARNFLAGS = -Wall -Wimplicit -Wmissing-field-initializers -Wmissing-prototypes -Wreturn-type -Wmissing-braces -Wparentheses -Wswitch -Wunused-function -Wunused-label -Wunused-parameter -Wunused-variable -Wshorten-64-to-32 -Wimplicit
 AM_OPTFLAGS = -ggdb -O0
 AM_CFLAGS = -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPACKAGE=${PACKAGE} -DVERSION=${VERSION} $(AM_WARNFLAGS) $(AM_OPTFLAGS)
 stress_SOURCES = stress.c
 stress_MANS = stress.1
+EXTRA_DIST = $(stress_MANS) ../doc/stress.1
+DISTCLEANFILES = .DS_Store ../doc/stress.1
+MAINTAINERCLEANFILES = $(stress_MANS)
 @BUILD_STATICLIB_TRUE@lib_LIBRARIES = libstress.a
 @BUILD_STATICLIB_TRUE@libstress_a_SOURCES = stress.c
 all: all-am
@@ -643,6 +645,7 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
 clean: clean-am
 
 clean-am: clean-binPROGRAMS clean-generic clean-libLIBRARIES \
@@ -732,6 +735,10 @@ uninstall-am: uninstall-binPROGRAMS uninstall-libLIBRARIES
 	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-am uninstall \
 	uninstall-am uninstall-binPROGRAMS uninstall-libLIBRARIES
 
+
+stress.1: ../doc/stress.1
+	$(MAKE) -C ../doc stress.1
+	test -e ../doc/stress.1 && cp -v ../doc/stress.1 .
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

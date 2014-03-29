@@ -250,10 +250,8 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I. --install
-MAINTAINERCLEANFILES = ltversion.m4 ltsugar.m4 lt~obsolete.m4 \
-                       ltoptions.m4 libtool.m4
-
 EXTRA_DIST = ax_spec_file.m4 ax_spec_package_version.m4 pkg.m4
+DISTCLEANFILES = .DS_Store
 all: all-am
 
 .SUFFIXES:
@@ -360,11 +358,11 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
-	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
 clean: clean-am
 
 clean-am: clean-generic clean-libtool mostlyclean-am

@@ -5,7 +5,7 @@ AC_INIT([stress],[1.0.4],[apw@rossby.metr.ou.edu])
 AC_CONFIG_SRCDIR([src/stress.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
-if test ! -e build-aux/install-sh; then
+if test ! -e ${srcdir}/build-aux/install-sh; then
   AC_MSG_NOTICE([install-sh is not present; autoreconf-ing for you])
   AC_PATH_PROGS([AUTORECONF],[autoreconf autoreconf-2.69 autoreconf264 autoreconf263 autoreconf213],
                [AC_MSG_ERROR([autoreconfing is necessary but impossible])],
