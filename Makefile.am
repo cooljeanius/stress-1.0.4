@@ -53,7 +53,7 @@ tests:
 .PHONY: tests
 
 configure.scan: src/stress.c
-	$(AUTOSCAN)
+	$(AUTOSCAN) || touch configure.scan
 
 distclean-local:
 	-rm -rf autom4te.cache || rmdir autom4te.cache
