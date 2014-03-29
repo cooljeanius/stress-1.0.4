@@ -1,6 +1,10 @@
+2014-03-29  Eric Gallager  <egall@gwmail.gwu.edu>
 
+    `make distcheck` now works
 
-
+(missing a few here... the Makefile target to regenerate this seems to work
+when I do all the steps in it manually, but not when I actually do it from
+the Makefile...)
 
 2014-03-27  Eric Gallager  <egall@gwmail.gwu.edu>
 
