@@ -10,3 +10,5 @@ script: ./configure --enable-staticlib && make && make check && make distcheck
 compiler:
   - clang
   - gcc
+
+after_failure: aclocal --version && autoconf --version
