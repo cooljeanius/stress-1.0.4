@@ -27,6 +27,7 @@ if test "x${am__api_version}" = "x"; then
   test -z "${am__api_version}" && export am__api_version='1.14'
 fi
 AM_INIT_AUTOMAKE([1.14 gnits])
+export AUTOMAKE=automake
 AM_MAINTAINER_MODE
 AM_SANITY_CHECK
 dnl# AX_* macros come from the autoconf-archive package:
