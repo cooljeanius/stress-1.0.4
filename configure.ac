@@ -1,15 +1,15 @@
 dnl#                                               -*- Autoconf -*-
 dnl# Process this file with autoconf to produce a configure script.
-AC_PREREQ([2.69])
+AC_PREREQ([2.68])
 AC_INIT([stress],[1.0.4],[apw@rossby.metr.ou.edu])
 AC_CONFIG_SRCDIR([src/stress.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 if test ! -e ${srcdir}/build-aux/install-sh; then
   AC_MSG_NOTICE([install-sh is not present; autoreconf-ing for you])
-  AC_PATH_PROGS([AUTORECONF],[autoreconf autoreconf-2.69 autoreconf264 autoreconf263 autoreconf213],
-               [AC_MSG_ERROR([autoreconfing is necessary but impossible])],
-               [${PATH}:/opt/local/bin:/sw/bin:/sw/lib/autoconf2.13/bin])
+  AC_PATH_PROGS([AUTORECONF],[autoreconf autoreconf264 autoreconf263 autoreconf213],
+                [AC_MSG_ERROR([autoreconfing is needed but impossible])],
+                [${PATH}:/opt/local/bin:/sw/bin:/sw/lib/autoconf2.13/bin])
   cd ${srcdir} && ${AUTORECONF} -fvi -Wall
   AC_MSG_NOTICE([done. Exiting so you can try to configure again.])
   exit 1
@@ -24,9 +24,9 @@ dnl# need a line of whitespace:
 
 dnl# now that we have checked that, we can check automake:
 if test "x${am__api_version}" = "x"; then
-  test -z "${am__api_version}" && export am__api_version='1.14'
+  test -z "${am__api_version}" && export am__api_version='1.11'
 fi
-AM_INIT_AUTOMAKE([1.14 gnits])
+AM_INIT_AUTOMAKE([1.11 gnits])
 export AUTOMAKE=automake
 AM_MAINTAINER_MODE
 AM_SANITY_CHECK
@@ -44,8 +44,9 @@ AC_SUBST([HELP2MAN])
 AC_PATH_PROG([MAKEINFO],[makeinfo],[],[/sw/opt/texinfo-legacy/bin:${PATH}])
 AM_MISSING_PROG([MAKEINFO],[makeinfo])
 AC_SUBST([MAKEINFO])
-AC_PATH_PROGS([AUTOSCAN],[autoscan autoscan-2.69 autoscan264 autoscan263 autoscan213],[touch configure.scan],
-             [${PATH}:/opt/local/bin:/sw/bin:/sw/lib/autoconf2.13/bin])
+AC_PATH_PROGS([AUTOSCAN],[autoscan autoscan264 autoscan263 autoscan213],
+              [touch configure.scan],
+              [${PATH}:/opt/local/bin:/sw/bin:/sw/lib/autoconf2.13/bin])
 AC_SUBST([AUTOSCAN])
 LT_INIT([disable-static])
 LTVERSION_VERSION

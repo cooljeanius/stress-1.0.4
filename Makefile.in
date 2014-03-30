@@ -338,7 +338,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-AUTOMAKE_OPTIONS = 1.14 gnits
+AUTOMAKE_OPTIONS = 1.11 gnits
 ACLOCAL_AMFLAGS = -I m4 --install
 DISTCLEANFILES = *~ autoscan.log .DS_Store ./configure.scan \
                  ./doc/stress.1 ./src/stress.1

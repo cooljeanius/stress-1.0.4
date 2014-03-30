@@ -2435,7 +2435,7 @@ ac_config_headers="$ac_config_headers config.h"
 if test ! -e ${srcdir}/build-aux/install-sh; then
   { $as_echo "$as_me:${as_lineno-$LINENO}: install-sh is not present; autoreconf-ing for you" >&5
 $as_echo "$as_me: install-sh is not present; autoreconf-ing for you" >&6;}
-  for ac_prog in autoreconf autoreconf-2.69 autoreconf264 autoreconf263 autoreconf213
+  for ac_prog in autoreconf autoreconf264 autoreconf263 autoreconf213
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -2480,7 +2480,7 @@ fi
 
   test -n "$AUTORECONF" && break
 done
-test -n "$AUTORECONF" || AUTORECONF="as_fn_error $? "autoreconfing is necessary but impossible" "$LINENO" 5"
+test -n "$AUTORECONF" || AUTORECONF="as_fn_error $? "autoreconfing is needed but impossible" "$LINENO" 5"
 
   cd ${srcdir} && ${AUTORECONF} -fvi -Wall
   { $as_echo "$as_me:${as_lineno-$LINENO}: done. Exiting so you can try to configure again." >&5
@@ -2631,7 +2631,7 @@ test -n "$target_alias" &&
     NONENONEs,x,x, &&
   program_prefix=${target_alias}-
 if test "x${am__api_version}" = "x"; then
-  test -z "${am__api_version}" && export am__api_version='1.14'
+  test -z "${am__api_version}" && export am__api_version='1.11'
 fi
 am__api_version='1.14'
 
@@ -5378,7 +5378,7 @@ fi
 MAKEINFO=${MAKEINFO-"${am_missing_run}makeinfo"}
 
 
-for ac_prog in autoscan autoscan-2.69 autoscan264 autoscan263 autoscan213
+for ac_prog in autoscan autoscan264 autoscan263 autoscan213
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2

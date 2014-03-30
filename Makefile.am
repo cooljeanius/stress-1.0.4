@@ -1,4 +1,4 @@
-AUTOMAKE_OPTIONS = 1.14 gnits
+AUTOMAKE_OPTIONS = 1.11 gnits
 
 ACLOCAL_AMFLAGS = -I m4 --install
 
