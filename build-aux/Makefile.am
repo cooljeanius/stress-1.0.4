@@ -7,3 +7,5 @@ compile install-sh test-driver: $(top_srcdir)/Makefile.am $(top_srcdir)/configur
 	cd $(top_srcdir) && $(AUTOMAKE) --add-missing --copy --force-missing
 
 EXTRA_DIST = install-sh
+
+DISTCLEANFILES = .DS_Store
