@@ -33,7 +33,7 @@ ChangeLog: $(srcdir)/build-aux/gitlog-to-changelog $(srcdir)/.last-cl-gen
 	fi
 
 ## FIXME: I think I might have broken it by splitting it up like this...
-.last-cl-gen: NEWS $(srcdir)/.git/COMMIT_EDITMSG
+.last-cl-gen: NEWS
 	if test -d $(srcdir)/.git; then    \
 	  git rev-list -n 1 HEAD | tee $@; \
 	fi

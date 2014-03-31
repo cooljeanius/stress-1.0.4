@@ -27,6 +27,7 @@ if test "x${am__api_version}" = "x"; then
   test -z "${am__api_version}" && export am__api_version='1.11'
 fi
 AM_INIT_AUTOMAKE([1.11 gnits])
+export ACLOCAL=aclocal
 export AUTOMAKE=automake
 AM_MAINTAINER_MODE
 AM_SANITY_CHECK
