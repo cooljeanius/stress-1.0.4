@@ -2,7 +2,7 @@ language: C
 
 install:
   # Prerequisites
-  -  "sudo apt-get install texinfo help2man cvs rcs autoconf autoconf-doc autoconf-archive automake texlive-base"
+  -  "sudo apt-get install texinfo help2man cvs rcs autoconf autoconf-doc autoconf-archive automake texlive-base texlive-latex-base texlive-generic-recommended texinfo-doc-nonfree"
 
 # try to build:
 script: ./configure --enable-staticlib && make && make check && make distcheck
