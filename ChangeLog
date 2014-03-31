@@ -1,4 +1,9 @@
+2014-03-30  Eric Gallager  <egall@gwmail.gwu.edu>
 
+	Not all versions of `fmt` accept the `-t` flag
+
+(missing a few more here... (see note below...) I think I have fixed it
+now though...)
 
 2014-03-29  Eric Gallager  <egall@gwmail.gwu.edu>
 

@@ -19,24 +19,29 @@ AUTOSCAN = @AUTOSCAN@
 
 ## Used to be generated via CVS, but we are now using git:
 ChangeLog: $(srcdir)/build-aux/gitlog-to-changelog $(srcdir)/.last-cl-gen
-	$(MAKE) .last-cl-gen
-	if test -d $(srcdir)/.git; then                  \
-	  $(srcdir)/build-aux/gitlog-to-changelog        \
-	      --format='%s%n%n%b%n' --no-cluster         \
-	      --strip-tab --strip-cherry-pick            \
-	      -- $$(cat $(srcdir)/.last-cl-gen)..        \
-	    | fmt -w 75 > ChangeLog.tmp                  \
-	  && (echo; cat $(srcdir)/ChangeLog | tab2space) \
-	  >> ChangeLog.tmp                               \
-	  && mv -f ChangeLog.tmp $(srcdir)/ChangeLog     \
-	  && rm -f ChangeLog.tmp;                        \
+	if test -d $(srcdir)/.git; then                       \
+	  $(srcdir)/build-aux/gitlog-to-changelog             \
+	      --format='%s%n%n%b%n' --no-cluster              \
+	      --strip-tab --strip-cherry-pick                 \
+	      -- $$(cat $(srcdir)/.last-cl-gen)..             \
+	    >> ChangeLog.tmp                                  \
+	  && (echo; cat $(srcdir)/ChangeLog) >> ChangeLog.tmp \
+	  && mv -fv ChangeLog.tmp $(srcdir)/ChangeLog         \
+	  && rm -fv ChangeLog.tmp;                            \
 	fi
 
-## FIXME: I think I might have broken it by splitting it up like this...
+## I think because I split this up from the above target, this now gets
+## regenerated first instead of second, which means that we need the
+## second-most recent revision to compare against, NOT the most recent one
+## (hence the pipe through `tail`):
 .last-cl-gen: NEWS
 	if test -d $(srcdir)/.git; then    \
-	  git rev-list -n 1 HEAD | tee $@; \
+	  git rev-list -n 2 HEAD | tail -n 1 | tee $@; \
 	fi
+
+update-ChangeLog:
+	touch NEWS && $(MAKE) ChangeLog
+.PHONY: update-ChangeLog
 
 docs:
 	$(MAKE) -C doc
