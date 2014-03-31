@@ -72,8 +72,8 @@ check-local: configure.scan build-aux/test-driver
 	@test -x src/stress || true
 .PHONY: check-local
 
-build-aux/compile: build-aux/Makefile m4/libtool.m4 m4/ltoptions.m4 m4/ltsugar.m4 m4/ltversion.m4 m4/lt~obsolete.m4 aclocal.m4
+build-aux/compile: build-aux/Makefile m4/libtool.m4 m4/ltoptions.m4 m4/ltsugar.m4 m4/ltversion.m4 m4/lt~obsolete.m4 aclocal.m4 configure.ac
 	$(MAKE) -C build-aux compile
 
-build-aux/test-driver: build-aux/Makefile m4/libtool.m4 m4/ltoptions.m4 m4/ltsugar.m4 m4/ltversion.m4 m4/lt~obsolete.m4 aclocal.m4
+build-aux/test-driver: build-aux/Makefile m4/libtool.m4 m4/ltoptions.m4 m4/ltsugar.m4 m4/ltversion.m4 m4/lt~obsolete.m4 aclocal.m4 configure.ac
 	$(MAKE) -C build-aux test-driver
