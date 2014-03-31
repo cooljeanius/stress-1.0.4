@@ -848,7 +848,7 @@ ChangeLog: $(srcdir)/build-aux/gitlog-to-changelog $(srcdir)/.last-cl-gen
 	      --format='%s%n%n%b%n' --no-cluster         \
 	      --strip-tab --strip-cherry-pick            \
 	      -- $$(cat $(srcdir)/.last-cl-gen)..        \
-	    | fmt -w 75 -t 4 > ChangeLog.tmp             \
+	    | fmt -w 75 > ChangeLog.tmp                  \
 	  && (echo; cat $(srcdir)/ChangeLog | tab2space) \
 	  >> ChangeLog.tmp                               \
 	  && mv -f ChangeLog.tmp $(srcdir)/ChangeLog     \
