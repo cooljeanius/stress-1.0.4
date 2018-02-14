@@ -17,6 +17,9 @@ stress.1: ../doc/stress.1
 	$(MAKE) -C ../doc stress.1
 	test -e ../doc/stress.1 && cp -v ../doc/stress.1 .
 
+distclean-local:
+	rm -rf *.dSYM || rmdir *.dSYM
+
 if BUILD_STATICLIB
 lib_LIBRARIES = libstress.a
 libstress_a_SOURCES = stress.c stress.h

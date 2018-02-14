@@ -7,7 +7,8 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 if test ! -e ${srcdir}/build-aux/install-sh; then
   AC_MSG_NOTICE([install-sh is not present; autoreconf-ing for you])
-  AC_PATH_PROGS([AUTORECONF],[autoreconf autoreconf264 autoreconf263 autoreconf213],
+  AC_PATH_PROGS([AUTORECONF],
+                [autoreconf autoreconf264 autoreconf263 autoreconf213],
                 [AC_MSG_ERROR([autoreconfing is needed but impossible])],
                 [${PATH}:/opt/local/bin:/sw/bin:/sw/lib/autoconf2.13/bin])
   cd ${srcdir} && ${AUTORECONF} -fvi -Wall
@@ -32,7 +33,7 @@ export AUTOMAKE=automake
 AM_MAINTAINER_MODE
 AM_SANITY_CHECK
 dnl# AX_* macros come from the autoconf-archive package:
-AX_SPEC_PACKAGE_AND_VERSION([Makefile.spec])
+AX_SPEC_PACKAGE_AND_VERSION([Makefile.spec])dnl
 
 dnl# Checks for programs.
 AC_PROG_CC
@@ -53,19 +54,19 @@ LT_INIT([disable-static])
 LTVERSION_VERSION
 
 # keep autoscan happy:
-if test "x" = "y"; then
-  test -x `which autoscan`
+if test "x0" = "Y1"; then
+  test -x "`which autoscan`"
   AC_PROG_RANLIB
 fi
 
 dnl# Checks for libraries.
 LT_LIB_M
 AC_CHECK_LIB([m],[sqrt])
-AC_CHECK_LIB([gen],[basename])
+AC_CHECK_LIB([gen],[basename])dnl
 
 dnl# Checks for header files.
 AC_HEADER_SYS_WAIT
-AC_CHECK_HEADERS([ctype.h errno.h libgen.h math.h stdio.h signal.h time.h])
+AC_CHECK_HEADERS([ctype.h errno.h libgen.h math.h stdio.h signal.h time.h])dnl
 
 dnl# Checks for typedefs, structures, and compiler characteristics.
 AC_SYS_LARGEFILE
@@ -75,21 +76,22 @@ AC_SUBST([ac_cv_sys_large_files])
 AC_C_BIGENDIAN
 AC_C_CONST
 AC_C_PROTOTYPES
-AC_CHECK_TYPES([long long])
+AC_CHECK_TYPES([long long])dnl
 
 dnl# Checks for library functions.
 AC_FUNC_FORK
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([alarm close exit fflush fprintf free getpid kill mkstemp \
                 perror rand signal sleep sqrt sscanf strcmp strerror sync \
-                time unlink usleep wait write])
+                time unlink usleep wait write])dnl
 
 dnl# Options that alter compile and link.
 dnl# change name to avoid conflict with the libtool-provided one:
 AC_ARG_ENABLE([staticlib],
-               [AS_HELP_STRING([--enable-staticlib],[build static library @<:@default=no@:>@])],
+               [AS_HELP_STRING([--enable-staticlib],
+                               [build static library @<:@default=no@:>@])],
                [staticlib=${enableval}],
-               [staticlib=no])
+               [staticlib=no])dnl
 
 dnl# Warning: this can make "`make distcheck`" fail:
 if test "x${staticlib}" = "xyes"; then
@@ -102,13 +104,14 @@ if test "x${staticlib}" = "xyes"; then
     fi
 fi
 
-AM_CONDITIONAL([BUILD_STATICLIB],[test "x${STATIC_LD}" = "x-static"])
+AM_CONDITIONAL([BUILD_STATICLIB],[test "x${STATIC_LD}" = "x-static"])dnl
 
+# Output.
 AC_CONFIG_FILES([Makefile \
 src/Makefile \
 doc/Makefile \
 test/Makefile \
 build-aux/Makefile \
-m4/Makefile])
+m4/Makefile])dnl
 
 AC_OUTPUT

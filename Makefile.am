@@ -8,7 +8,7 @@ MAINTAINERCLEANFILES = install-sh mkinstalldirs missing \
                        Log.cvs depcomp configure.scan
 
 EXTRA_DIST = ChangeLog .last-cl-gen Makefile.spec README.md \
-             ./doc/stress.1 ./src/stress.1
+             ./doc/stress.1 ./src/stress.1 ./build-aux/gitlog-to-changelog
 
 SUBDIRS = . src doc test build-aux m4
 
@@ -73,7 +73,7 @@ check-local: configure.scan build-aux/test-driver
 .PHONY: check-local
 
 build-aux/compile: build-aux/Makefile m4/libtool.m4 m4/ltoptions.m4 m4/ltsugar.m4 m4/ltversion.m4 m4/lt~obsolete.m4 aclocal.m4 configure.ac
-	$(MAKE) -C build-aux compile
+	-$(MAKE) -C build-aux compile
 
 build-aux/test-driver: build-aux/Makefile m4/libtool.m4 m4/ltoptions.m4 m4/ltsugar.m4 m4/ltversion.m4 m4/lt~obsolete.m4 aclocal.m4 configure.ac
-	$(MAKE) -C build-aux test-driver
+	-$(MAKE) -C build-aux test-driver

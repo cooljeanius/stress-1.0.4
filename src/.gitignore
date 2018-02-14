@@ -3,3 +3,4 @@ stress
 lib*.a
 TAGS
 stress.1
+*.dSYM
