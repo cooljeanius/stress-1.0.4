@@ -42,14 +42,14 @@ AC_PROG_GCC_TRADITIONAL
 PKG_PROG_PKG_CONFIG
 AC_PATH_PROG([HELP2MAN],[help2man],[:],[${PATH}:/opt/local/bin:/sw/bin])
 AM_MISSING_PROG([HELP2MAN],[help2man])
-AC_SUBST([HELP2MAN])
+AC_SUBST([HELP2MAN])dnl
 AC_PATH_PROG([MAKEINFO],[makeinfo],[],[/sw/opt/texinfo-legacy/bin:${PATH}])
 AM_MISSING_PROG([MAKEINFO],[makeinfo])
-AC_SUBST([MAKEINFO])
+AC_SUBST([MAKEINFO])dnl
 AC_PATH_PROGS([AUTOSCAN],[autoscan autoscan264 autoscan263 autoscan213],
               [touch configure.scan],
               [${PATH}:/opt/local/bin:/sw/bin:/sw/lib/autoconf2.13/bin])
-AC_SUBST([AUTOSCAN])
+AC_SUBST([AUTOSCAN])dnl
 LT_INIT([disable-static])
 LTVERSION_VERSION
 
@@ -70,9 +70,9 @@ AC_CHECK_HEADERS([ctype.h errno.h libgen.h math.h stdio.h signal.h time.h])dnl
 
 dnl# Checks for typedefs, structures, and compiler characteristics.
 AC_SYS_LARGEFILE
-AC_SUBST([ac_cv_sys_largefile_CC])
-AC_SUBST([ac_cv_sys_file_offset_bits])
-AC_SUBST([ac_cv_sys_large_files])
+AC_SUBST([ac_cv_sys_largefile_CC])dnl
+AC_SUBST([ac_cv_sys_file_offset_bits])dnl
+AC_SUBST([ac_cv_sys_large_files])dnl
 AC_C_BIGENDIAN
 AC_C_CONST
 AC_C_PROTOTYPES
