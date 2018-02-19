@@ -3,3 +3,4 @@ config.sub linguist-vendored
 depcomp linguist-vendored
 install-sh linguist-vendored
 ltmain.sh linguist-vendored
+Makefile.in linguist-vendored
