@@ -3,3 +3,5 @@ Makefile.in linguist-vendored
 aclocal.m4 linguist-vendored
 m4/libtool.m4 linguist-vendored
 m4/lt*.m4 linguist-vendored
+m4/ax_*.m4 linguist-vendored
+m4/pkg.m4 linguist-vendored
