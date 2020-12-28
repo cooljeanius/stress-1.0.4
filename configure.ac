@@ -66,7 +66,13 @@ AC_CHECK_LIB([gen],[basename])dnl
 
 dnl# Checks for header files.
 AC_HEADER_SYS_WAIT
-AC_CHECK_HEADERS([ctype.h errno.h libgen.h math.h stdio.h signal.h time.h])dnl
+AC_CHECK_HEADERS([ctype.h errno.h libgen.h math.h signal.h time.h])
+AC_CHECK_HEADERS_ONCE([stdio.h])dnl
+
+if test "x${ac_cv_header_unistd_h}" = "x"; then
+  test -z "${ac_cv_header_unistd_h}"
+  AC_CHECK_HEADERS([unistd.h])
+fi
 
 dnl# Checks for typedefs, structures, and compiler characteristics.
 AC_SYS_LARGEFILE

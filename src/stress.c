@@ -393,11 +393,12 @@ main(int argc, char **argv)
 int
 hogcpu(void)
 {
+    volatile double dummy;
 	while (1) {
-		sqrt(rand());
+		dummy = round(sqrt(rand()));
 	}
 
-  return 0;
+  return (int)dummy;
 }
 
 int
