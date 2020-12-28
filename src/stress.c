@@ -1,4 +1,4 @@
-/* stress.c: A program to put stress on a POSIX system (stress).
+/* stress.c: A program to put stress on a POSIX system (stress). -*- C -*-
  *
  * Copyright (C) 2001,2002,2003,2004,2005,2006,2007,2008,2009,2010
  * Amos Waterland <apw@rossby.metr.ou.edu>
@@ -33,13 +33,13 @@
 #include "../config.h"
 #include "stress.h"
 
-/* By default, print all messages of severity info and above.  */
+/* By default, print all messages of severity info and above: */
 static int global_debug = 2;
 
 /* Name of this program */
 static char *global_progname = PACKAGE;
 
-/* Implemention of runtime-selectable severity message printing.  */
+/* Macros for implemention of runtime-selectable severity message printing: */
 #define dbg(OUT, STR, ARGS...) if (global_debug >= 3) \
 	fprintf(stdout, "%s: dbug: [%lli] ", \
 		global_progname, (long long)getpid()), \
@@ -59,8 +59,8 @@ static char *global_progname = PACKAGE;
 
 /* Implementation of check for option argument correctness.  */
 #define assert_arg(A) \
-          if (++i == argc || ((arg = argv[i])[0] == '-' && \
-              !isdigit ((int)arg[1]) )) \
+          if ((++i == argc) || (((arg = argv[i])[0] == '-') && \
+              !isdigit((int)arg[1]))) \
             { \
               err(stderr, "missing argument to option '%s'\n", A); \
               exit(1); \
@@ -100,13 +100,13 @@ main(int argc, char **argv)
     long long do_hdd_bytes = (1024 * 1024 * 1024);
     /* (1024 * 1024 * 1024) = 1073741824 */
 
-    /* Record our start time.  */
+    /* Record our start time: */
     if ((starttime = time (NULL)) == -1) {
         err(stderr, "failed to acquire current time: %s\n", strerror(errno));
         exit(1);
     }
 
-    /* SuSv3 does not define any error conditions for this function.  */
+    /* SuSv3 does not define any error conditions for this function: */
     global_progname = basename(argv[0]);
 
     /* For portability, parse command line options without getopt_long(), and
@@ -206,7 +206,7 @@ main(int argc, char **argv)
         }
     }
 
-    /* Print startup message if we have work to do, bail otherwise.  */
+    /* Print startup message if we have work to do, bail otherwise: */
     if (do_cpu + do_io + do_vm + do_hdd) {
         out(stdout, "dispatching hogs: %lli cpu, %lli io, %lli vm, %lli hdd\n",
             do_cpu, do_io, do_vm, do_hdd);
@@ -214,25 +214,25 @@ main(int argc, char **argv)
         usage(0);
     }
 
-    /* Round robin dispatch our worker processes.  */
+    /* Round robin dispatch our worker processes: */
     while ((forks = (do_cpu + do_io + do_vm + do_hdd))) {
         long long backoff, timeout = 0;
 
-        /* Calculate the backoff value so we get good fork throughput.  */
+        /* Calculate the backoff value so we get good fork throughput: */
         backoff = (do_backoff * forks);
         dbg(stdout, "using backoff sleep of %llius\n", backoff);
 
-        /* If we are supposed to respect a timeout, calculate it.  */
+        /* If we are supposed to respect a timeout, calculate it: */
         if (do_timeout) {
             long long currenttime;
 
-            /* Acquire current time.  */
+            /* Acquire current time: */
             if ((currenttime = time(NULL)) == -1) {
                 perror("error acquiring current time");
                 exit(1);
             }
 
-            /* Calculate timeout based on current time.  */
+            /* Calculate timeout based on current time: */
             timeout = (do_timeout - (currenttime - starttime));
 
             if (timeout > 0) {
@@ -322,7 +322,7 @@ main(int argc, char **argv)
         }
     }
 
-    /* Wait for our children to exit.  */
+    /* Wait for our children to exit: */
     while (children) {
         int status, ret;
 
@@ -370,16 +370,16 @@ main(int argc, char **argv)
         }
     }
 
-    /* Record our stop time.  */
+    /* Record our stop time: */
     if ((stoptime = time(NULL)) == -1) {
         err(stderr, "failed to acquire current time\n");
         exit(1);
     }
 
-    /* Calculate our runtime.  */
+    /* Calculate our runtime: */
     runtime = (stoptime - starttime);
 
-    /* Print final status message.  */
+    /* Print final status message: */
     if (retval) {
         err(stderr, "failed run completed in %lis\n", runtime);
     } else {
@@ -471,7 +471,7 @@ hoghdd(long long bytes)
     int chunk = ((1024 * 1024) - 1);        /* Minimize slow writing.  */
     char buff[chunk];
 
-    /* Initialize buffer with some random ASCII data.  */
+    /* Initialize buffer with some random ASCII data: */
     dbg(stdout, "seeding %d byte buffer with random data\n", chunk);
     for ((i = 0); (i < (chunk - 1)); i++) {
         j = rand();
