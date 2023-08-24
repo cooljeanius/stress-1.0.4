@@ -5,6 +5,8 @@ EXTRA_DIST = $(man_MANS) stress.html ../src/stress.1
 DISTCLEANFILES = .DS_Store ../src/stress.1
 MAINTAINERCLEANFILES = mdate-sh texinfo.tex stress.html stress.info.html $(man_MANS)
 
+AM_DISTCHECK_DVI_TARGET = pdf
+
 stress.1: ../src/stress
 	$(HELP2MAN) -n 'tool to impose load on and stress test systems' ../src/stress > $@
 

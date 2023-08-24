@@ -1,3 +1,7 @@
+2023-08-24  Eric Gallager  <egall@gwmail.gwu.edu>
+
+	CI needs missing script, too
+
 2014-03-30  Eric Gallager  <egall@gwmail.gwu.edu>
 
 	Not all versions of `fmt` accept the `-t` flag

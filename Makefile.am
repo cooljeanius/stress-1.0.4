@@ -17,6 +17,8 @@ PACKAGE = @PACKAGE@
 
 AUTOSCAN = @AUTOSCAN@
 
+AM_DISTCHECK_DVI_TARGET = TAGS
+
 ## Used to be generated via CVS, but we are now using git:
 ChangeLog: $(srcdir)/build-aux/gitlog-to-changelog $(srcdir)/.last-cl-gen
 	if test -d $(srcdir)/.git; then                       \
