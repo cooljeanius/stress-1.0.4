@@ -14,7 +14,9 @@ jobs:
 #     # 'compiler' was not transformed because there is no suitable equivalent in GitHub Actions
     - run: sudo apt-get update
     - run: sudo apt-get install texinfo help2man cvs rcs autoconf autoconf-doc autoconf-archive automake texlive-base texlive-latex-base emacs-common-non-dfsg info
-    - run: "./configure --enable-staticlib && make && make check && make distcheck"
+    - run: "./configure --enable-staticlib && make && make check"
+    - run: "make distcheck"
+      if: "${{ success() }}"
     - run: aclocal --version && autoconf --version
       if: "${{ failure() }}"
     strategy:
