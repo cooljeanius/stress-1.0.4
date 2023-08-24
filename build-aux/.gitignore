@@ -1,6 +1,6 @@
 ./*
 !compile
 mdate-sh
-missing
+!missing
 test-driver
 texinfo.tex
