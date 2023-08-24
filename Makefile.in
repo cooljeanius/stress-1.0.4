@@ -363,7 +363,7 @@ EXTRA_DIST = ChangeLog .last-cl-gen Makefile.spec README.md \
              ./doc/stress.1 ./src/stress.1 ./build-aux/gitlog-to-changelog
 
 SUBDIRS = . src doc test build-aux m4
-AM_DISTCHECK_DVI_TARGET = ID
+AM_DISTCHECK_DVI_TARGET = CTAGS
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
