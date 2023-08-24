@@ -206,8 +206,6 @@ am__relativize = \
 DIST_ARCHIVES = $(distdir).tar.gz
 GZIP_ENV = --best
 DIST_TARGETS = dist-gzip
-# Exists only to be overridden by the user if desired.
-AM_DISTCHECK_DVI_TARGET = dvi
 distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
@@ -365,6 +363,7 @@ EXTRA_DIST = ChangeLog .last-cl-gen Makefile.spec README.md \
              ./doc/stress.1 ./src/stress.1 ./build-aux/gitlog-to-changelog
 
 SUBDIRS = . src doc test build-aux m4
+AM_DISTCHECK_DVI_TARGET = TAGS
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
