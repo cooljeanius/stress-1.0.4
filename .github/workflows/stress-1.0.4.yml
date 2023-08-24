@@ -1,0 +1,26 @@
+name: cooljeanius/stress-1.0.4
+on:
+  push:
+    branches:
+    - "**/*"
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3.5.0
+#     # 'Transformers::TravisCI::Scripts::Dependencies' dependencies are currently unsupported
+#     # 'compiler' was not transformed because there is no suitable equivalent in GitHub Actions
+    - run: sudo apt-get update
+    - run: sudo apt-get install texinfo help2man cvs rcs autoconf autoconf-doc autoconf-archive automake texlive-base texlive-latex-base emacs-common-non-dfsg info
+    - run: "./configure --enable-staticlib && make && make check"
+    - run: "make distcheck"
+      if: "${{ success() }}"
+    - run: aclocal --version && autoconf --version
+      if: "${{ failure() }}"
+    strategy:
+      matrix:
+        compiler:
+        - clang
+        - gcc
