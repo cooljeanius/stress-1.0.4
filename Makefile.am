@@ -21,7 +21,7 @@ AM_DISTCHECK_DVI_TARGET = TAGS
 
 ## Used to be generated via CVS, but we are now using git:
 ChangeLog: $(srcdir)/build-aux/gitlog-to-changelog $(srcdir)/.last-cl-gen
-	if test -d $(srcdir)/.git; then                       \
+	-if test -d $(srcdir)/.git && test -x "`which git`"; then \
 	  $(srcdir)/build-aux/gitlog-to-changelog             \
 	      --format='%s%n%n%b%n' --no-cluster              \
 	      --strip-tab --strip-cherry-pick                 \
@@ -30,6 +30,8 @@ ChangeLog: $(srcdir)/build-aux/gitlog-to-changelog $(srcdir)/.last-cl-gen
 	  && (echo; cat $(srcdir)/ChangeLog) >> ChangeLog.tmp \
 	  && mv -fv ChangeLog.tmp $(srcdir)/ChangeLog         \
 	  && rm -fv ChangeLog.tmp;                            \
+	else                                                  \
+	  touch ChangeLog;                                    \
 	fi
 
 ## I think because I split this up from the above target, this now gets
