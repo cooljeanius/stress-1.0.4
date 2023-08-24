@@ -29,3 +29,4 @@ stress-1.0.4*
 conf*/*.awk
 *.tar.gz
 configure.scan
+.env.local
