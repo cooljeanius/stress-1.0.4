@@ -1,0 +1,26 @@
+name: cooljeanius/stress-1.0.4
+on:
+  push:
+    branches:
+    - "**/*"
+  pull_request:
+concurrency:
+#   # This item has no matching transformer
+#   maximum_number_of_builds: 0
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3.5.0
+#     # 'Transformers::TravisCI::Scripts::Dependencies' dependencies are currently unsupported
+#     # 'compiler' was not transformed because there is no suitable equivalent in GitHub Actions
+    - run: sudo apt-get install texinfo help2man cvs rcs autoconf autoconf-doc autoconf-archive automake texlive-base texlive-latex-base texlive-generic-recommended texinfo-doc-nonfree
+    - run: "./configure --enable-staticlib && make && make check && make distcheck"
+    - run: aclocal --version && autoconf --version
+      if: "${{ failure() }}"
+    strategy:
+      matrix:
+        compiler:
+        - clang
+        - gcc
