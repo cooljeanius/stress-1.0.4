@@ -1,4 +1,6 @@
-language: C
+language: c
+os: linux
+dist: xenial
 
 install:
   # Prerequisites
