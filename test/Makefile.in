@@ -825,8 +825,9 @@ ps: ps-am
 ps-am:
 
 uninstall-am:
-
-.MAKE: check-am install-am install-strip
+	@$(NORMAL_INSTALL)
+	$(MAKE) $(AM_MAKEFLAGS) uninstall-hook
+.MAKE: check-am install-am install-strip uninstall-am
 
 .PHONY: all all-am check check-TESTS check-am clean clean-generic \
 	clean-libtool cscopelist-am ctags-am distclean \
@@ -839,10 +840,15 @@ uninstall-am:
 	installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic \
 	mostlyclean-libtool pdf pdf-am ps ps-am recheck tags-am \
-	uninstall uninstall-am
+	uninstall uninstall-am uninstall-hook
 
 .PRECIOUS: Makefile
 
+
+uninstall-hook:
+	-if test -n "$(DESTDIR)" && test -d "$(DESTDIR)"; then \
+	  find "$(DESTDIR)" -name .DS_Store -delete; fi
+.PHONY: uninstall-hook
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

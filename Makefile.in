@@ -354,7 +354,7 @@ top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = 1.11 gnits
 ACLOCAL_AMFLAGS = -I m4 --install
 DISTCLEANFILES = *~ autoscan.log .DS_Store ./configure.scan \
-                 ./doc/stress.1 ./src/stress.1
+                 ./doc/stress.1 ./src/stress.1 share/info/dir
 
 MAINTAINERCLEANFILES = install-sh mkinstalldirs missing \
                        Log.cvs depcomp configure.scan
@@ -841,8 +841,10 @@ ps: ps-recursive
 ps-am:
 
 uninstall-am:
-
-.MAKE: $(am__recursive_targets) all check-am install-am install-strip
+	@$(NORMAL_INSTALL)
+	$(MAKE) $(AM_MAKEFLAGS) uninstall-hook
+.MAKE: $(am__recursive_targets) all check-am install-am install-strip \
+	uninstall-am
 
 .PHONY: $(am__recursive_targets) CTAGS GTAGS TAGS all all-am \
 	am--refresh check check-am check-local clean clean-cscope \
@@ -859,7 +861,7 @@ uninstall-am:
 	install-strip installcheck installcheck-am installdirs \
 	installdirs-am maintainer-clean maintainer-clean-generic \
 	mostlyclean mostlyclean-generic mostlyclean-libtool pdf pdf-am \
-	ps ps-am tags tags-am uninstall uninstall-am
+	ps ps-am tags tags-am uninstall uninstall-am uninstall-hook
 
 .PRECIOUS: Makefile
 
@@ -906,11 +908,17 @@ configure.scan: src/stress.c
 
 distclean-local:
 	-rm -rf autom4te.cache || rmdir autom4te.cache
+	-find . -name .DS_Store -delete
 .PHONY: distclean-local
 
 maintainerclean-local:
 	-rm -rf $(PACKAGE)-$(VERSION) || rmdir $(PACKAGE)-$(VERSION)
 .PHONY: maintainerclean-local
+
+uninstall-hook:
+	-if test -n "$(DESTDIR)" && test -d "$(DESTDIR)"; then \
+	  find "$(DESTDIR)" -name .DS_Store -delete; fi
+.PHONY: uninstall-hook
 
 check-local: configure.scan build-aux/test-driver
 	@test -x src/stress || true

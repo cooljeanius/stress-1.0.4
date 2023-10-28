@@ -10,7 +10,7 @@ stress_SOURCES = stress.c stress.h
 stress_MANS = stress.1
 
 EXTRA_DIST = $(stress_MANS) ../doc/stress.1
-DISTCLEANFILES = .DS_Store ../doc/stress.1
+DISTCLEANFILES = .DS_Store ../doc/stress.1 share/info/dir
 MAINTAINERCLEANFILES = $(stress_MANS)
 
 stress.1: ../doc/stress.1
@@ -19,6 +19,14 @@ stress.1: ../doc/stress.1
 
 distclean-local:
 	rm -rf *.dSYM || rmdir *.dSYM
+
+uninstall-hook:
+	-if test -n "$(DESTDIR)" && test -d "$(DESTDIR)"; then \
+	  find "$(DESTDIR)" -name .DS_Store -delete; \
+	elif test -d $(DESTDIR)$(bindir); then \
+	  find $(DESTDIR)$(bindir) -name .DS_Store -delete; \
+	fi
+.PHONY: uninstall-hook
 
 if BUILD_STATICLIB
 lib_LIBRARIES = libstress.a

@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS = 1.11 gnits
 ACLOCAL_AMFLAGS = -I m4 --install
 
 DISTCLEANFILES = *~ autoscan.log .DS_Store ./configure.scan \
-                 ./doc/stress.1 ./src/stress.1
+                 ./doc/stress.1 ./src/stress.1 share/info/dir
 MAINTAINERCLEANFILES = install-sh mkinstalldirs missing \
                        Log.cvs depcomp configure.scan
 
@@ -66,11 +66,17 @@ configure.scan: src/stress.c
 
 distclean-local:
 	-rm -rf autom4te.cache || rmdir autom4te.cache
+	-find . -name .DS_Store -delete
 .PHONY: distclean-local
 
 maintainerclean-local:
 	-rm -rf $(PACKAGE)-$(VERSION) || rmdir $(PACKAGE)-$(VERSION)
 .PHONY: maintainerclean-local
+
+uninstall-hook:
+	-if test -n "$(DESTDIR)" && test -d "$(DESTDIR)"; then \
+	  find "$(DESTDIR)" -name .DS_Store -delete; fi
+.PHONY: uninstall-hook
 
 check-local: configure.scan build-aux/test-driver
 	@test -x src/stress || true

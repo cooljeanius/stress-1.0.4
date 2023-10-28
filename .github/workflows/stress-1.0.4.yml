@@ -2,7 +2,9 @@ name: cooljeanius/stress-1.0.4
 on:
   push:
     branches:
-    - "**/*"
+      - "**/*"
+    tags:
+      - "**/*"
   pull_request:
 jobs:
   test:
@@ -19,6 +21,11 @@ jobs:
       if: "${{ success() }}"
     - run: aclocal --version && autoconf --version
       if: "${{ failure() }}"
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        name: gzipped_tarfile-${{ matrix.compiler }}
+        path: stress-1.0.4.tar.gz
     strategy:
       matrix:
         compiler:

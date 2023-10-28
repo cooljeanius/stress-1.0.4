@@ -367,7 +367,7 @@ AM_CFLAGS = -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPACKAGE=${PACKAGE} -DVE
 stress_SOURCES = stress.c stress.h
 stress_MANS = stress.1
 EXTRA_DIST = $(stress_MANS) ../doc/stress.1
-DISTCLEANFILES = .DS_Store ../doc/stress.1
+DISTCLEANFILES = .DS_Store ../doc/stress.1 share/info/dir
 MAINTAINERCLEANFILES = $(stress_MANS)
 @BUILD_STATICLIB_TRUE@lib_LIBRARIES = libstress.a
 @BUILD_STATICLIB_TRUE@libstress_a_SOURCES = stress.c stress.h
@@ -767,8 +767,9 @@ ps-am:
 
 uninstall-am: uninstall-binPROGRAMS uninstall-includeHEADERS \
 	uninstall-libLIBRARIES
-
-.MAKE: install-am install-strip
+	@$(NORMAL_INSTALL)
+	$(MAKE) $(AM_MAKEFLAGS) uninstall-hook
+.MAKE: install-am install-strip uninstall-am
 
 .PHONY: CTAGS GTAGS TAGS all all-am am--depfiles check check-am clean \
 	clean-binPROGRAMS clean-generic clean-libLIBRARIES \
@@ -785,7 +786,7 @@ uninstall-am: uninstall-binPROGRAMS uninstall-includeHEADERS \
 	maintainer-clean maintainer-clean-generic mostlyclean \
 	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
 	pdf pdf-am ps ps-am tags tags-am uninstall uninstall-am \
-	uninstall-binPROGRAMS uninstall-includeHEADERS \
+	uninstall-binPROGRAMS uninstall-hook uninstall-includeHEADERS \
 	uninstall-libLIBRARIES
 
 .PRECIOUS: Makefile
@@ -797,6 +798,14 @@ stress.1: ../doc/stress.1
 
 distclean-local:
 	rm -rf *.dSYM || rmdir *.dSYM
+
+uninstall-hook:
+	-if test -n "$(DESTDIR)" && test -d "$(DESTDIR)"; then \
+	  find "$(DESTDIR)" -name .DS_Store -delete; \
+	elif test -d $(DESTDIR)$(bindir); then \
+	  find $(DESTDIR)$(bindir) -name .DS_Store -delete; \
+	fi
+.PHONY: uninstall-hook
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
