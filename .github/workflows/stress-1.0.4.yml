@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: checkout
-      uses: actions/checkout@v4.1.1
+      uses: actions/checkout@v4.1.2
     - run: sudo apt-get update
     - run: sudo apt-get install texinfo help2man cvs rcs autoconf autoconf-doc autoconf-archive automake texlive-base texlive-latex-base emacs-common-non-dfsg info ${{ matrix.compiler }}
     - run: "./configure --enable-staticlib CC=${{ matrix.compiler }} && make && make check"
