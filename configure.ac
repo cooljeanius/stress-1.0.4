@@ -8,9 +8,9 @@ AC_CONFIG_MACRO_DIR([m4])
 if test ! -e ${srcdir}/build-aux/install-sh; then
   AC_MSG_NOTICE([install-sh is not present; autoreconf-ing for you])
   AC_PATH_PROGS([AUTORECONF],
-                [autoreconf autoreconf264 autoreconf263 autoreconf213],
+                [autoreconf autoreconf270 autoreconf269 autoreconf268],
                 [AC_MSG_ERROR([autoreconfing is needed but impossible])],
-                [${PATH}:/opt/local/bin:/sw/bin:/sw/lib/autoconf2.13/bin])
+                [${PATH}:/opt/local/bin:/sw/bin:/opt/sw/bin])
   cd ${srcdir} && ${AUTORECONF} -fvi -Wall
   AC_MSG_NOTICE([done. Exiting so you can try to configure again.])
   exit 1
@@ -27,7 +27,7 @@ dnl# now that we have checked that, we can check automake:
 if test "x${am__api_version}" = "x"; then
   test -z "${am__api_version}" && export am__api_version='1.11'
 fi
-AM_INIT_AUTOMAKE([1.11 gnits])
+AM_INIT_AUTOMAKE([1.11.6 gnits])
 export ACLOCAL=aclocal
 export AUTOMAKE=automake
 AM_MAINTAINER_MODE
@@ -38,7 +38,7 @@ AX_SPEC_PACKAGE_AND_VERSION([Makefile.spec])dnl
 dnl# Checks for programs.
 AC_PROG_CC
 AC_PROG_CXX
-AC_PROG_GCC_TRADITIONAL
+AC_PROG_CPP
 PKG_PROG_PKG_CONFIG
 AC_PATH_PROG([HELP2MAN],[help2man],[:],[${PATH}:/opt/local/bin:/sw/bin])
 AM_MISSING_PROG([HELP2MAN],[help2man])
@@ -46,12 +46,28 @@ AC_SUBST([HELP2MAN])dnl
 AC_PATH_PROG([MAKEINFO],[makeinfo],[],[/sw/opt/texinfo-legacy/bin:${PATH}])
 AM_MISSING_PROG([MAKEINFO],[makeinfo])
 AC_SUBST([MAKEINFO])dnl
-AC_PATH_PROGS([AUTOSCAN],[autoscan autoscan264 autoscan263 autoscan213],
+AC_PATH_PROGS([AUTOSCAN],[autoscan autoscan270 autoscan269 autoscan268],
               [touch configure.scan],
-              [${PATH}:/opt/local/bin:/sw/bin:/sw/lib/autoconf2.13/bin])
+              [${PATH}:/opt/local/bin:/sw/bin:/opt/sw/bin])
 AC_SUBST([AUTOSCAN])dnl
 LT_INIT([disable-static])
 LTVERSION_VERSION
+
+if test "x${AR}" = "x"; then
+  test -z "${AR}" || unset AR
+  AC_CHECK_TOOLS([AR],[ar gar])dnl
+  ## might want to switch around these checks...
+  if test "x${ac_cv_prog_AR}" = "x"; then
+    test -z "${ac_cv_prog_AR}" || unset ac_cv_prog_AR
+    m4_ifdef([AC_PROG_AR],[
+      AC_PROG_AR
+    ],[
+      test -x "`which ar`"
+    ])
+  fi
+else
+  test -n "${AR}" && export AR
+fi
 
 # keep autoscan happy:
 if test "x0" = "Y1"; then

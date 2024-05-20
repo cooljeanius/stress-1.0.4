@@ -1,3 +1,9 @@
+2024-05-19  Eric Gallager  <egall@gwmail.gwu.edu>
+
+	Update codeql.yml
+
+	remove ruby
+
 2023-08-24  Eric Gallager  <egall@gwmail.gwu.edu>
 
 	CI needs missing script, too
