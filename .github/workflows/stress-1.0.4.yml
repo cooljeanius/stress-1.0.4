@@ -20,7 +20,7 @@ jobs:
     - run: aclocal --version && autoconf --version
       if: "${{ failure() }}"
     - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v4.3.4
+      uses: actions/upload-artifact@v4.3.5
       with:
         name: gzipped_tarfile-${{ matrix.compiler }}
         path: stress-1.0.4.tar.gz
