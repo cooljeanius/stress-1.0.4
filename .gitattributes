@@ -5,6 +5,7 @@ m4/libtool.m4 linguist-vendored
 m4/lt*.m4 linguist-vendored
 m4/ax_*.m4 linguist-vendored
 m4/pkg.m4 linguist-vendored
+Makefile.spec linguist-language=specfile
 
 # Gnulib's git-merge-changelog driver:
 ChangeLog    merge=cl-merge

@@ -1,4 +1,4 @@
-AUTOMAKE_OPTIONS = 1.11 gnits
+AUTOMAKE_OPTIONS = 1.11.6 gnits
 
 ACLOCAL_AMFLAGS = -I m4 --install
 
@@ -43,11 +43,11 @@ ChangeLog: $(srcdir)/build-aux/gitlog-to-changelog $(srcdir)/.last-cl-gen
 	  git rev-list -n 2 HEAD | tail -n 1 | tee $@; \
 	fi
 
-update-ChangeLog:
+update-ChangeLog: @MAINT@ Makefile
 	touch NEWS && $(MAKE) ChangeLog
 .PHONY: update-ChangeLog
 
-docs:
+docs: @MAINT@ doc/Makefile
 	$(MAKE) -C doc
 .PHONY: docs
 
@@ -57,7 +57,7 @@ docs:
 ./src/stress.1: docs
 	$(MAKE) -C src stress.1
 
-tests:
+tests: @MAINT@ test/Makefile
 	$(MAKE) -C test
 .PHONY: tests
 
@@ -79,7 +79,7 @@ uninstall-hook:
 .PHONY: uninstall-hook
 
 check-local: configure.scan build-aux/test-driver
-	@test -x src/stress || true
+	@test -x src/stress || stat src/stress || ls src/stress*
 .PHONY: check-local
 
 build-aux/compile: build-aux/Makefile m4/libtool.m4 m4/ltoptions.m4 m4/ltsugar.m4 m4/ltversion.m4 m4/lt~obsolete.m4 aclocal.m4 configure.ac
