@@ -270,7 +270,7 @@ top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I../m4 --install
 MAINTAINERCLEANFILES = compile mdate-sh missing test-driver texinfo.tex
 EXTRA_DIST = install-sh gitlog-to-changelog
-DISTCLEANFILES = .DS_Store
+DISTCLEANFILES = .DS_Store *~
 all: all-am
 
 .SUFFIXES:

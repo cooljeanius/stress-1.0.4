@@ -8,7 +8,7 @@ compile install-sh test-driver: $(top_srcdir)/Makefile.am $(top_srcdir)/configur
 
 EXTRA_DIST = install-sh gitlog-to-changelog
 
-DISTCLEANFILES = .DS_Store
+DISTCLEANFILES = .DS_Store *~
 
 uninstall-hook:
 	-if test -n "$(DESTDIR)" && test -d "$(DESTDIR)"; then \

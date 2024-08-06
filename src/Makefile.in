@@ -798,6 +798,7 @@ stress.1: ../doc/stress.1
 
 distclean-local:
 	rm -rf *.dSYM || rmdir *.dSYM
+	rm -rf .deps || rmdir .deps
 
 uninstall-hook:
 	-if test -n "$(DESTDIR)" && test -d "$(DESTDIR)"; then \
